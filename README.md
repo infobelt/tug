@@ -16,3 +16,7 @@ Getting Started
 You will need a Java 11 JDK and Groovy/Gradle installed.
 
 
+License
+=======
+
+[Apache 2.0](LICENSE.md)
