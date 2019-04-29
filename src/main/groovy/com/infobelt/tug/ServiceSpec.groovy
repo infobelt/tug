@@ -1,6 +1,7 @@
 package com.infobelt.tug
 
 import groovy.util.logging.Slf4j
+import org.atteo.evo.inflector.English
 
 @Slf4j
 class ServiceSpec {
@@ -34,6 +35,8 @@ class ServiceSpec {
         def code = cl.rehydrate(resourceSpec, this, this)
         code.resolveStrategy = Closure.DELEGATE_ONLY
         code()
+
+        resourceSpec.pluralName ?: resourceSpec.pluralName(English.plural(resourceSpec.name))
         resources << resourceSpec
     }
 

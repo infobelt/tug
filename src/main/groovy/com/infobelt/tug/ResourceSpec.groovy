@@ -19,8 +19,8 @@ class ResourceSpec {
 
     def get(id) {
         try {
-            def path = "/" + endpoint() + "/" + id
-            log.info("Performing GET on ${endpoint()} with ID ${id} [${path}]")
+            def path = "/" + pluralName + "/" + id
+            log.info("Performing GET on ${pluralName} with ID ${id} [${path}]")
             def response = handler.client().get(path: path, contentType: contentType)
             return response.responseData
         } catch (HttpResponseException e) {
@@ -29,15 +29,11 @@ class ResourceSpec {
         }
     }
 
-    def endpoint() {
-        pluralName != null ? pluralName : English.plural(name)
-    }
-
     def delete(id) {
         try {
-            def path = "/" + endpoint() + "/" + id
-            log.info("Performing GET on ${endpoint()} with ID ${id} [${path}]")
-            def response = handler.client().delete(path: path)
+            def path = pluralName + "/" + id
+            log.info("Performing GET on ${path} with ID ${id}")
+            def response = handler.client(path).delete()
             return response.responseData
         } catch (HttpResponseException e) {
             log.error("Error making request (HTTP code ${e.statusCode})")
@@ -47,9 +43,8 @@ class ResourceSpec {
 
     def list() {
         try {
-            def path = "/" + endpoint()
-            log.info("Performing GET on ${endpoint()} [${path}]")
-            def response = handler.client().get(path: path)
+            log.info("Performing GET on ${pluralName}")
+            def response = handler.client(pluralName).get(contentType: contentType)
             return response.responseData
         } catch (HttpResponseException e) {
             log.error("Error making request (HTTP code ${e.statusCode})")
@@ -59,10 +54,9 @@ class ResourceSpec {
 
     def create(Map instance) {
         try {
-            log.info("Performing POST on ${endpoint()} with object ${instance}")
-            def response = handler.client().post(path: endpoint(), body: instance, requestContentType: contentType)
+            log.info("Performing POST on ${pluralName} with object ${instance}")
+            def response = handler.client(pluralName).post(body: instance, requestContentType: contentType)
             log.info("POST response ${response.responseData}")
-
             return response.responseData
         } catch (HttpResponseException e) {
             log.error("Error making request (HTTP code ${e.statusCode})")
@@ -72,7 +66,8 @@ class ResourceSpec {
 
     def update(instance) {
         try {
-            def response = handler.client().put(path: endpoint(), body: instance, requestContentType: contentType)
+            def path = pluralName + "/" + instance.id
+            def response = handler.client(path).put(body: instance, requestContentType: contentType)
             return response.responseData
         } catch (HttpResponseException e) {
             log.error("Error making request (HTTP code ${e.statusCode})")

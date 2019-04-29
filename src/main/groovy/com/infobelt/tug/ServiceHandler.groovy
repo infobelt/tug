@@ -14,17 +14,18 @@ class ServiceHandler {
         this.serviceSpec = serviceSpec
 
         serviceSpec.resources.forEach({ r ->
-            resources.put(r.endpoint(), r)
+            resources.put(r.pluralName, r)
             r.handler = this
         })
-    }
+    };
 
-    def client() {
-        def url = "http://" + serviceSpec.hostname + ":" + serviceSpec.port + "/" + serviceSpec.urlBase
+    def client(path = "") {
+        def url = "http://" + serviceSpec.hostname + ":" + serviceSpec.port + "/" + serviceSpec.urlBase + "/" + path
         log.info("Built client [${url}]")
         def restClient = new RESTClient(url)
 
         if (serviceSpec.auth) {
+            log.info("Applying auth")
             serviceSpec.auth.apply(restClient)
         }
 
