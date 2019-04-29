@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label "jenkins-gradle"
+    label "jenkins-maven-java11"
   }
   environment {
     ORG = 'infobelt'
@@ -22,7 +22,7 @@ pipeline {
 
           slackSend(color: 'green', message: "Tug :: Starting PR build [${env.PREVIEW_VERSION}] (${env.BUILD_URL})")
 
-          sh "gradle clean build"
+          sh "mvn clean install"
         }
       }
     }
@@ -51,7 +51,7 @@ pipeline {
           slackSend(color: 'good', message: "Tug :: Building ${env.VERSION} (${env.BUILD_URL})")
 
           sh "jx step tag --version \$(cat VERSION)"
-          sh "gradle clean build"
+          sh "mvn clean deploy"
         }
       }
     }

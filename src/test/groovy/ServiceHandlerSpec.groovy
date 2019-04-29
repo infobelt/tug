@@ -7,7 +7,7 @@ import static com.infobelt.tug.ServiceSpec.service
 
 @Ignore
 @Stepwise
-class ServiceHandlerSpecification extends Specification {
+class ServiceHandlerSpec extends Specification {
 
     @Shared
             serviceInstance = service {

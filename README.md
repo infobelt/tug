@@ -13,8 +13,13 @@ Its aim is to allow:
 Getting Started
 ===============
 
-You will need a Java 11 JDK and Groovy/Gradle installed.
+You will need a Java 11 JDK and Maven installed.
 
+```bash
+mvn clean install
+```
+
+Note you need the IntelliJ GMavenPlus plugin installed.
 
 License
 =======

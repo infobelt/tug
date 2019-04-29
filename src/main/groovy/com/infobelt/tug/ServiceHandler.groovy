@@ -22,7 +22,13 @@ class ServiceHandler {
     def client() {
         def url = "http://" + serviceSpec.hostname + ":" + serviceSpec.port + "/" + serviceSpec.urlBase
         log.info("Built client [${url}]")
-        return new RESTClient(url)
+        def restClient = new RESTClient(url)
+
+        if (serviceSpec.auth) {
+            serviceSpec.auth.apply(restClient)
+        }
+
+        restClient
     }
 
 }
