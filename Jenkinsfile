@@ -18,7 +18,7 @@ pipeline {
         HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
       }
       steps {
-        container('gradle') {
+        container('maven') {
 
           slackSend(color: 'green', message: "Tug :: Starting PR build [${env.PREVIEW_VERSION}] (${env.BUILD_URL})")
 
@@ -31,7 +31,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        container('gradle') {
+        container('maven') {
 
           slackSend(color: 'good', message: "Tug :: Starting Release (${env.BUILD_URL})")
 
