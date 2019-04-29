@@ -63,7 +63,7 @@ pipeline {
   }
   post {
     always {
-      junit '**/surefire-reports/*.xml'
+      junit testResults: '**/surefire-reports/*.xml', allowEmptyResults: true
       cleanWs()
     }
     success {
