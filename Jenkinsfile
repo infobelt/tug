@@ -22,6 +22,7 @@ pipeline {
 
           slackSend(color: 'green', message: "Tug :: Starting PR build [${env.PREVIEW_VERSION}] (${env.BUILD_URL})")
 
+          sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
           sh "mvn clean install"
         }
       }
@@ -50,6 +51,7 @@ pipeline {
 
           slackSend(color: 'good', message: "Tug :: Building ${env.VERSION} (${env.BUILD_URL})")
 
+          sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
           sh "jx step tag --version \$(cat VERSION)"
           sh "mvn clean deploy"
         }
