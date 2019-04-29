@@ -58,7 +58,7 @@ pipeline {
   }
   post {
     always {
-      junit '**/TEST*.xml'
+      junit testResults:  '**/TEST*.xml', allowEmptyResults: true
       cleanWs()
     }
     success {
