@@ -20,7 +20,9 @@ class ServiceHandler {
     }
 
     def client() {
-        return new RESTClient("http://" + serviceSpec.hostname + ":" + serviceSpec.port + "/" + serviceSpec.urlBase)
+        def url = "http://" + serviceSpec.hostname + ":" + serviceSpec.port + "/" + serviceSpec.urlBase
+        log.info("Built client [${url}]")
+        return new RESTClient(url)
     }
 
 }

@@ -9,7 +9,7 @@ class ServiceSpec {
 
     int port = 8080
 
-    String urlBase = "/api"
+    String urlBase = "api"
 
     List<ResourceSpec> resources = []
 

@@ -1,9 +1,11 @@
+import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Stepwise
 
 import static com.infobelt.tug.ServiceSpec.service
 
+@Ignore
 @Stepwise
 class ServiceHandlerSpecification extends Specification {
 
@@ -47,6 +49,16 @@ class ServiceHandlerSpecification extends Specification {
         widget != null
         widget.id == widgetId
         widget.widgetName == "Cheese"
+    }
+
+    def "List widgets"() {
+        given:
+        serviceInstance
+        when:
+        def page = serviceInstance.resources.widgets.list()
+        print(page)
+        then:
+        page != null
     }
 
 }

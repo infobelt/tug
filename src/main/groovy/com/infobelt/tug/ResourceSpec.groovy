@@ -24,7 +24,8 @@ class ResourceSpec {
             def response = handler.client().get(path: path, contentType: contentType)
             return response.responseData
         } catch (HttpResponseException e) {
-            print("Error " + e.statusCode)
+            log.error("Error making request (HTTP code ${e.statusCode})")
+            throw e
         }
     }
 
@@ -39,12 +40,21 @@ class ResourceSpec {
             def response = handler.client().delete(path: path)
             return response.responseData
         } catch (HttpResponseException e) {
-            print("Error " + e.statusCode)
+            log.error("Error making request (HTTP code ${e.statusCode})")
+            throw e
         }
     }
 
-    def all() {
-
+    def list() {
+        try {
+            def path = "/" + endpoint()
+            log.info("Performing GET on ${endpoint()} [${path}]")
+            def response = handler.client().get(path: path)
+            return response.responseData
+        } catch (HttpResponseException e) {
+            log.error("Error making request (HTTP code ${e.statusCode})")
+            throw e
+        }
     }
 
     def create(Map instance) {
@@ -55,7 +65,8 @@ class ResourceSpec {
 
             return response.responseData
         } catch (HttpResponseException e) {
-            print("Error " + e.statusCode)
+            log.error("Error making request (HTTP code ${e.statusCode})")
+            throw e
         }
     }
 
@@ -64,7 +75,8 @@ class ResourceSpec {
             def response = handler.client().put(path: endpoint(), body: instance, requestContentType: contentType)
             return response.responseData
         } catch (HttpResponseException e) {
-            print("Error " + e.statusCode)
+            log.error("Error making request (HTTP code ${e.statusCode})")
+            throw e
         }
     }
 }
