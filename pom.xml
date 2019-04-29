@@ -5,7 +5,6 @@
     <artifactId>tug</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <name>Tug</name>
-    <packaging>jar</packaging>
     <description>
         Tug is a little framework for building REST API clients.
     </description>
@@ -45,6 +44,12 @@
 
 
         <!-- Test Dependencies -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>com.athaydes</groupId>
             <artifactId>spock-reports</artifactId>
