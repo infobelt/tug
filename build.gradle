@@ -2,11 +2,14 @@ plugins {
     id 'groovy'
 }
 
+apply plugin: 'maven'
+
 group 'com.infobelt'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
