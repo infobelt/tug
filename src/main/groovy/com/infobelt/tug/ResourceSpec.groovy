@@ -3,7 +3,6 @@ package com.infobelt.tug
 import groovy.util.logging.Slf4j
 import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseException
-import org.atteo.evo.inflector.English
 
 @Slf4j
 class ResourceSpec {
@@ -24,8 +23,7 @@ class ResourceSpec {
             def response = handler.client().get(path: path, contentType: contentType)
             return response.responseData
         } catch (HttpResponseException e) {
-            log.error("Error making request (HTTP code ${e.statusCode})")
-            throw e
+            throw new TugException(e)
         }
     }
 
@@ -36,8 +34,7 @@ class ResourceSpec {
             def response = handler.client(path).delete()
             return response.responseData
         } catch (HttpResponseException e) {
-            log.error("Error making request (HTTP code ${e.statusCode})")
-            throw e
+            throw new TugException(e)
         }
     }
 
@@ -47,8 +44,7 @@ class ResourceSpec {
             def response = handler.client(pluralName).get(contentType: contentType)
             return response.responseData
         } catch (HttpResponseException e) {
-            log.error("Error making request (HTTP code ${e.statusCode})")
-            throw e
+            throw new TugException(e)
         }
     }
 
@@ -59,8 +55,7 @@ class ResourceSpec {
             log.info("POST response ${response.responseData}")
             return response.responseData
         } catch (HttpResponseException e) {
-            log.error("Error making request (HTTP code ${e.statusCode})")
-            throw e
+            throw new TugException(e)
         }
     }
 
@@ -70,8 +65,7 @@ class ResourceSpec {
             def response = handler.client(path).put(body: instance, requestContentType: contentType)
             return response.responseData
         } catch (HttpResponseException e) {
-            log.error("Error making request (HTTP code ${e.statusCode})")
-            throw e
+            throw new TugException(e)
         }
     }
 }
