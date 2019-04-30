@@ -6,7 +6,7 @@ import groovyx.net.http.HttpResponseException
 @Slf4j
 class TugException extends RuntimeException {
 
-    TugException(HttpResponseException httpResponseException) {
+    TugException(HttpResponseException e) {
         super("Error making request (HTTP code ${e.statusCode})", e)
         log.error("Error making request (HTTP code ${e.statusCode})")
     }
