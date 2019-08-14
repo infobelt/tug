@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.infobelt</groupId>
     <artifactId>tug</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.16</version>
     <name>Tug</name>
     <description>
         Tug is a little framework for building REST API clients.
